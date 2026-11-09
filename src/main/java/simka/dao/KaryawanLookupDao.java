@@ -14,3 +14,4 @@ public class KaryawanLookupDao {
             (rs, i) -> new Option(rs.getInt("id"), rs.getString("label")));
     }
 }
+//Spring

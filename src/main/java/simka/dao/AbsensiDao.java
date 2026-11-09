@@ -35,3 +35,4 @@ public class AbsensiDao {
         return jdbc.update("DELETE FROM absensi WHERE id=?", id);
     }
 }
+//Spring

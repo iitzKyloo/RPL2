@@ -36,3 +36,4 @@ public class CutiDao {
         return jdbc.update("DELETE FROM cuti WHERE id=?", id);
     }
 }
+//Spring

@@ -47,8 +47,8 @@ public class DashboardForm extends JFrame {
         bar.add(master);
 
         JMenu transaksi = new JMenu("Transaksi");
-        transaksi.add(item("Absensi", () -> tampil(buatPlaceholder("Absensi"))));
-        transaksi.add(item("Pengajuan Cuti", () -> tampil(buatPlaceholder("Pengajuan Cuti"))));
+        transaksi.add(item("Absensi", () -> tampil(new AbsensiPanel())));
+        transaksi.add(item("Pengajuan Cuti", () -> tampil(new CutiPanel())));
         transaksi.add(item("Persetujuan", () -> tampil(buatPlaceholder("Persetujuan"))));
         transaksi.add(item("Penggajian", () -> tampil(buatPlaceholder("Penggajian"))));
         bar.add(transaksi);

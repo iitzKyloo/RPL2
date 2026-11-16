@@ -1,0 +1,154 @@
+<!-- Created with Jaspersoft Studio version 7.0.8.final using JasperReports Library version 7.0.8-6f896111  -->
+<jasperReport name="laporan_gaji" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9dbebc4-baf7-463c-86a7-12ea3424680f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="simka"/>
+	<parameter name="PERIODE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<query language="sql"><![CDATA[SELECT k.nama, j.nama_jabatan, g.periode, g.gaji_pokok, g.tunjangan, g.potongan,
+       (g.gaji_pokok + g.tunjangan - g.potongan) AS total
+FROM gaji g
+JOIN karyawan k ON g.id_karyawan = k.id_karyawan
+JOIN jabatan j ON k.id_jabatan = j.id_jabatan
+WHERE $P{PERIODE} IS NULL OR g.periode = $P{PERIODE}
+ORDER BY g.periode DESC, k.nama]]></query>
+	<field name="nama" class="java.lang.String"/>
+	<field name="nama_jabatan" class="java.lang.String"/>
+	<field name="periode" class="java.lang.String"/>
+	<field name="gaji_pokok" class="java.math.BigDecimal"/>
+	<field name="tunjangan" class="java.math.BigDecimal"/>
+	<field name="potongan" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<variable name="TOTAL_SEMUA" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{total}]]></expression>
+	</variable>
+	<title height="60">
+		<element kind="staticText" uuid="3de91220-4065-4b86-955e-0a7c40664bb2" x="0" y="5" width="555" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[LAPORAN GAJI KARYAWAN]]></text>
+		</element>
+		<element kind="textField" uuid="f93865fa-5a95-47fe-bfa7-ad67f27f6818" x="0" y="35" width="555" height="18" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{PERIODE} == null ? "Semua Periode" : "Periode: " + $P{PERIODE}]]></expression>
+		</element>
+	</title>
+	<columnHeader height="25">
+		<element kind="staticText" uuid="481ce022-2e48-4d8b-b58a-a9d29e436f5d" x="0" y="0" width="25" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[No]]></text>
+		</element>
+		<element kind="staticText" uuid="325672d2-dc69-4e6b-a0b8-412ea97fbeec" x="25" y="0" width="120" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Nama]]></text>
+		</element>
+		<element kind="staticText" uuid="0555c3e2-a4d7-40b0-bec8-a6f772551c6f" x="145" y="0" width="85" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Jabatan]]></text>
+		</element>
+		<element kind="staticText" uuid="ce3de8a1-9ec3-45df-9f1c-5af7cf4099dc" x="230" y="0" width="55" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Periode]]></text>
+		</element>
+		<element kind="staticText" uuid="c4079f51-7303-4f9f-8220-5be30dcd37ee" x="285" y="0" width="75" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Gaji Pokok]]></text>
+		</element>
+		<element kind="staticText" uuid="ebe1f8c3-1708-46d0-870a-5ecd259b6971" x="360" y="0" width="60" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Tunjangan]]></text>
+		</element>
+		<element kind="staticText" uuid="04bcef4d-0a16-4a1a-acb1-4dcb0928be23" x="420" y="0" width="60" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Potongan]]></text>
+		</element>
+		<element kind="staticText" uuid="c3fe434e-5211-4045-8dcc-ab3c07de6275" x="480" y="0" width="75" height="25" backcolor="#D9D9D9" mode="Opaque" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+			<text><![CDATA[Total]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<element kind="textField" uuid="a3bf0529-bd92-417f-b32d-d32b4922b1fd" x="0" y="0" width="25" height="22" hTextAlign="Center" vTextAlign="Middle">
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$V{REPORT_COUNT}]]></expression>
+			</element>
+			<element kind="textField" uuid="62c4b2fb-56ea-42cf-9f7e-afe59b59a179" x="25" y="0" width="120" height="22" vTextAlign="Middle">
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{nama}]]></expression>
+			</element>
+			<element kind="textField" uuid="ed696c44-8e5d-4499-8a45-afea49c60320" x="145" y="0" width="85" height="22" vTextAlign="Middle">
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{nama_jabatan}]]></expression>
+			</element>
+			<element kind="textField" uuid="c3dd9e45-3b56-4a26-a58c-2d3f9291735d" x="230" y="0" width="55" height="22" hTextAlign="Center" vTextAlign="Middle">
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{periode}]]></expression>
+			</element>
+			<element kind="textField" uuid="86caac00-6c42-4463-86fe-0809977c3cac" x="285" y="0" width="75" height="22" pattern="#,##0" hTextAlign="Right" vTextAlign="Middle">
+				<box rightPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{gaji_pokok}]]></expression>
+			</element>
+			<element kind="textField" uuid="216dc793-46fc-4121-95c5-7eb4952d492e" x="360" y="0" width="60" height="22" pattern="#,##0" hTextAlign="Right" vTextAlign="Middle">
+				<box rightPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{tunjangan}]]></expression>
+			</element>
+			<element kind="textField" uuid="d6e622f2-54cf-43e6-8ad2-ec9eaa4ffbac" x="420" y="0" width="60" height="22" pattern="#,##0" hTextAlign="Right" vTextAlign="Middle">
+				<box rightPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{potongan}]]></expression>
+			</element>
+			<element kind="textField" uuid="f869078b-c9ff-4c7d-8ec8-3176d738d60e" x="480" y="0" width="75" height="22" pattern="#,##0" hTextAlign="Right" vTextAlign="Middle">
+				<box rightPadding="4">
+					<pen lineWidth="0.5"/>
+				</box>
+				<expression><![CDATA[$F{total}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="25">
+		<element kind="textField" uuid="ac33d504-9445-47ec-94a3-7ca33df5fa80" x="0" y="5" width="300" height="18" fontSize="8.0" vTextAlign="Middle">
+			<expression><![CDATA["Dicetak: " + new java.text.SimpleDateFormat("dd MMMM yyyy HH:mm").format(new java.util.Date())]]></expression>
+		</element>
+		<element kind="textField" uuid="c6c50d83-44e3-47b4-9134-c12dad0d5de8" x="355" y="5" width="200" height="18" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+			<expression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="30">
+		<element kind="staticText" uuid="3596dccd-4d8f-41e0-a437-96cc7ddbe47f" x="285" y="5" width="195" height="22" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<box rightPadding="4"/>
+			<text><![CDATA[Total Seluruh Gaji:]]></text>
+		</element>
+		<element kind="textField" uuid="9f06bd1e-8564-47a7-ae2b-b317c5091600" x="480" y="5" width="75" height="22" pattern="#,##0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<box rightPadding="4">
+				<pen lineWidth="0.5"/>
+			</box>
+			<expression><![CDATA[$V{TOTAL_SEMUA}]]></expression>
+		</element>
+	</summary>
+</jasperReport>

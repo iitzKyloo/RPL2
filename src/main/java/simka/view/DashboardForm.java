@@ -53,7 +53,7 @@ public class DashboardForm extends JFrame {
         transaksi.add(item("Penggajian", () -> tampil(buatPlaceholder("Penggajian"))));
         bar.add(transaksi);
 
-        bar.add(item("Laporan", () -> tampil(buatPlaceholder("Laporan"))));
+        bar.add(item("Laporan", () -> tampil(new LaporanGajiPanel())));
         bar.add(item("Logout", this::logout));
 
         return bar;
